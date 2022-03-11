@@ -21,7 +21,7 @@ class TodoListView(APIView):
     def post(self, request):
         # Implement this method - accept a todo item in a mongo collection, persist it using db instance above.
         task = request.data
-        if "title" in task:
+        if "title" in task and len(task.keys()) == 1:
             db['todo'].insert_one(task)
             return Response({"successfully added task!"}, status=status.HTTP_200_OK) 
         else:
